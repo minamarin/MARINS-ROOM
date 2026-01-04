@@ -1,5 +1,5 @@
 import { GetSignedUploadUrlSchema } from "@marins-room/shared";
-import { Router } from "express";
+import { Router, type IRouter } from "express";
 import { v4 as uuidv4 } from "uuid";
 
 import { logger } from "../lib/logger.js";
@@ -9,7 +9,7 @@ import { requireAdmin } from "../middleware/admin.js";
 import { rateLimit } from "../middleware/rateLimit.js";
 import { validateBody } from "../middleware/validate.js";
 
-export const uploadsRouter = Router();
+export const uploadsRouter: IRouter = Router();
 
 // Admin only - rate limit: 20 uploads per hour
 uploadsRouter.use(requireAdmin);

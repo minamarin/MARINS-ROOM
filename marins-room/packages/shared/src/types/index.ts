@@ -493,6 +493,7 @@ export interface GetSessionMessagesResponse {
  */
 export type WsMessageType =
   | "JOIN_SESSION"
+  | "SESSION_JOINED"
   | "LEAVE_SESSION"
   | "SEND_MESSAGE"
   | "MESSAGE_RECEIVED"

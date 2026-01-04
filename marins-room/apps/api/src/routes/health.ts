@@ -1,9 +1,9 @@
-import { Router } from "express";
+import { Router, type IRouter } from "express";
 
 import { prisma } from "../lib/prisma.js";
 import { redis } from "../lib/redis.js";
 
-export const healthRouter = Router();
+export const healthRouter: IRouter = Router();
 
 healthRouter.get("/", async (_req, res) => {
   const checks = {

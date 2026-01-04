@@ -51,6 +51,7 @@ export default function BlogPostPage({ params }: Props) {
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -80,7 +81,7 @@ export default function BlogPostPage({ params }: Props) {
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-sm"
+                  className="px-3 py-1 bg-primary-100 text-primary-900 rounded-full text-sm"
                 >
                   {tag}
                 </span>

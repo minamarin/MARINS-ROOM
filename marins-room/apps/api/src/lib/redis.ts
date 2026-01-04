@@ -97,7 +97,7 @@ redis.on("connect", () => {
   logger.info("Connected to Redis");
 });
 
-redis.on("error", (error) => {
+redis.on("error", (error: Error) => {
   logger.error("Redis error:", error);
 });
 

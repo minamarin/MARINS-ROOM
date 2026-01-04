@@ -41,6 +41,7 @@ export default async function VideoPage({ params }: Props) {
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -59,7 +60,10 @@ export default async function VideoPage({ params }: Props) {
               controls
               className="w-full h-full"
               poster={video.thumbnailUrl || undefined}
+              aria-label={video.title}
             >
+              {/* Captions track - add VTT files when available */}
+              {/* <track kind="captions" src="/captions/video.vtt" srcLang="en" label="English" /> */}
               Your browser does not support the video tag.
             </video>
           ) : (

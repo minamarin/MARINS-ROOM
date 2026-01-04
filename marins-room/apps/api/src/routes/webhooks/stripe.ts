@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express, { Router, type IRouter } from "express";
 import type Stripe from "stripe";
 
 import { env } from "../../config/env.js";
@@ -6,7 +6,7 @@ import { logger } from "../../lib/logger.js";
 import { prisma } from "../../lib/prisma.js";
 import { stripe } from "../../lib/stripe.js";
 
-export const stripeWebhookRouter = Router();
+export const stripeWebhookRouter: IRouter = Router();
 
 // Use raw body for Stripe webhook verification
 stripeWebhookRouter.use(express.raw({ type: "application/json" }));

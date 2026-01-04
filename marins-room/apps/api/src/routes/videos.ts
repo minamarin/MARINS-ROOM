@@ -1,5 +1,5 @@
 import { PaginationSchema, UpdateVideoStatusSchema, VideoIdSchema } from "@marins-room/shared";
-import { Router } from "express";
+import { Router, type IRouter } from "express";
 import { z } from "zod";
 
 import { logger } from "../lib/logger.js";
@@ -8,14 +8,14 @@ import { getPublicUrl } from "../lib/s3.js";
 import { requireAdmin } from "../middleware/admin.js";
 import { validateBody, validateParams, validateQuery } from "../middleware/validate.js";
 
-export const videosRouter = Router();
+export const videosRouter: IRouter = Router();
 
 /**
  * List all videos (public - only READY videos)
  * GET /videos
  */
 videosRouter.get("/", validateQuery(PaginationSchema), async (req, res) => {
-  const { page, pageSize } = req.query as { page: number; pageSize: number };
+  const { page, pageSize } = req.query as unknown as { page: number; pageSize: number };
   const skip = (page - 1) * pageSize;
 
   const [videos, total] = await Promise.all([

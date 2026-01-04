@@ -4,7 +4,7 @@ import {
   SessionIdSchema,
   StartChatSessionSchema,
 } from "@marins-room/shared";
-import { Router } from "express";
+import { Router, type IRouter } from "express";
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
@@ -15,7 +15,7 @@ import { requireAdmin } from "../middleware/admin.js";
 import { rateLimit } from "../middleware/rateLimit.js";
 import { validateBody, validateParams, validateQuery } from "../middleware/validate.js";
 
-export const chatRouter = Router();
+export const chatRouter: IRouter = Router();
 
 /**
  * Start a new chat session
@@ -185,7 +185,7 @@ chatRouter.get(
   requireAdmin,
   validateQuery(PaginationSchema),
   async (req, res) => {
-    const { page, pageSize } = req.query as { page: number; pageSize: number };
+    const { page, pageSize } = req.query as unknown as { page: number; pageSize: number };
     const skip = (page - 1) * pageSize;
 
     const [sessions, total] = await Promise.all([
@@ -337,7 +337,7 @@ chatRouter.post(
     // In production, you might want a separate ADMIN role
     const message = await prisma.chatMessage.create({
       data: {
-        sessionId,
+        sessionId: sessionId!,
         role: "ASSISTANT",
         content: `[Marin]: ${content}`,
       },

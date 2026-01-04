@@ -102,6 +102,6 @@ import { env } from "../config/env.js";
  *   - The frontend uses the publishable key (pk_...)
  */
 export const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
-  apiVersion: "2024-04-10",
+  apiVersion: "2023-10-16",
   typescript: true,
 });

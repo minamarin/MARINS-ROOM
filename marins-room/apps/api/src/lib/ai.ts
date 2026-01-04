@@ -44,7 +44,9 @@ export async function getAIResponse(
       };
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as {
+      choices?: Array<{ message?: { content?: string } }>;
+    };
     const content = data.choices?.[0]?.message?.content;
 
     if (!content) {

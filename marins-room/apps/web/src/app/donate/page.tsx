@@ -170,7 +170,11 @@ export default function DonatePage() {
 
           {/* Error */}
           {error && (
-            <div className="p-4 bg-red-50 text-red-700 rounded-lg text-sm">
+            <div
+              role="alert"
+              aria-live="polite"
+              className="p-4 bg-red-50 text-red-700 rounded-lg text-sm"
+            >
               {error}
             </div>
           )}

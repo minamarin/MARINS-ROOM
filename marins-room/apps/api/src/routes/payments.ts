@@ -1,5 +1,5 @@
 import { CreateCheckoutSessionSchema } from "@marins-room/shared";
-import { Router } from "express";
+import { Router, type IRouter } from "express";
 
 import { env } from "../config/env.js";
 import { logger } from "../lib/logger.js";
@@ -8,7 +8,7 @@ import { stripe } from "../lib/stripe.js";
 import { rateLimit } from "../middleware/rateLimit.js";
 import { validateBody } from "../middleware/validate.js";
 
-export const paymentsRouter = Router();
+export const paymentsRouter: IRouter = Router();
 
 // Rate limit: 10 checkout sessions per IP per hour
 paymentsRouter.use(

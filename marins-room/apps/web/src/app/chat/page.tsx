@@ -147,6 +147,7 @@ export default function ChatPage() {
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 strokeLinecap="round"
@@ -167,7 +168,11 @@ export default function ChatPage() {
           </p>
 
           {error && (
-            <div className="p-4 bg-red-50 text-red-700 rounded-lg text-sm mb-6">
+            <div
+              role="alert"
+              aria-live="polite"
+              className="p-4 bg-red-50 text-red-700 rounded-lg text-sm mb-6"
+            >
               {error}
             </div>
           )}
@@ -201,13 +206,19 @@ export default function ChatPage() {
                 <p className="text-xs text-gray-500">
                   {isConnected ? (
                     <span className="flex items-center gap-1">
-                      <span className="w-2 h-2 bg-green-500 rounded-full" />
-                      Online
+                      <span
+                        className="w-2 h-2 bg-green-500 rounded-full"
+                        aria-hidden="true"
+                      />
+                      <span aria-live="polite">Online</span>
                     </span>
                   ) : (
                     <span className="flex items-center gap-1">
-                      <span className="w-2 h-2 bg-gray-400 rounded-full" />
-                      Connecting...
+                      <span
+                        className="w-2 h-2 bg-gray-400 rounded-full"
+                        aria-hidden="true"
+                      />
+                      <span aria-live="polite">Connecting...</span>
                     </span>
                   )}
                 </p>
@@ -216,7 +227,11 @@ export default function ChatPage() {
           </div>
 
           {/* Messages */}
-          <div className="h-[400px] overflow-y-auto p-6 space-y-4">
+          <div
+            className="h-[400px] overflow-y-auto p-6 space-y-4"
+            aria-live="polite"
+            aria-label="Chat messages"
+          >
             {messages.map((message) => (
               <div
                 key={message.id}
@@ -283,7 +298,11 @@ export default function ChatPage() {
         </div>
 
         {error && (
-          <div className="mt-4 p-4 bg-red-50 text-red-700 rounded-lg text-sm">
+          <div
+            role="alert"
+            aria-live="polite"
+            className="mt-4 p-4 bg-red-50 text-red-700 rounded-lg text-sm"
+          >
             {error}
           </div>
         )}
