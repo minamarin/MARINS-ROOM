@@ -276,6 +276,15 @@ pnpm format           # Format with Prettier
 - [ ] Implement proper admin authentication
 - [ ] Add tests
 
+## Disclaimer
+
+This project is provided as-is for educational and personal use. By using this code, you acknowledge:
+
+- **You are responsible** for securing and operating your own deployment
+- **Payments are processed by Stripe** — review their terms and ensure compliance
+- **No legal, tax, or financial advice** is provided by this project
+- **Maintenance is best-effort** — issues and PRs may not receive immediate responses
+
 ## License
 
 MIT
