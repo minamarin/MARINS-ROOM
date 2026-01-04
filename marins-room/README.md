@@ -2,6 +2,8 @@
 
 A production-grade monorepo implementing a personal website with blogging (MDX), donations (Stripe), video uploads (S3-compatible), and AI-powered real-time chat.
 
+![Marin's Room Homepage](docs/screenshot.png)
+
 ## Architecture
 
 ```
