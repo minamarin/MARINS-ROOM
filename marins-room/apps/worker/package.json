@@ -1,0 +1,30 @@
+{
+  "name": "@marins-room/worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Background job runner for video processing and emails",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@marins-room/shared": "workspace:*",
+    "@prisma/client": "^5.12.0",
+    "bullmq": "^5.4.0",
+    "dotenv": "^16.4.5",
+    "ioredis": "^5.3.2",
+    "pino": "^8.19.0",
+    "pino-pretty": "^11.0.0"
+  },
+  "devDependencies": {
+    "@marins-room/config": "workspace:*",
+    "@types/node": "^20.12.0",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.0"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "name": "marins-room",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Marin's Room - Personal website with blog, donations, video uploads, and AI chat",
+  "scripts": {
+    "dev": "pnpm -r --parallel --filter=!@marins-room/worker dev",
+    "dev:all": "pnpm -r --parallel dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "typecheck": "pnpm -r typecheck",
+    "db:generate": "pnpm --filter @marins-room/api db:generate",
+    "db:migrate": "pnpm --filter @marins-room/api db:migrate",
+    "db:push": "pnpm --filter @marins-room/api db:push",
+    "db:studio": "pnpm --filter @marins-room/api db:studio",
+    "clean": "pnpm -r clean && rm -rf node_modules"
+  },
+  "devDependencies": {
+    "@marins-room/config": "workspace:*",
+    "prettier": "^3.2.5",
+    "turbo": "^2.0.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

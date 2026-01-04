@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Visa Nova styles must be imported AFTER Tailwind layers */
+@import "@visa/nova-styles/styles.css";
+@import "@visa/nova-styles/themes/visa/index.css";
+
+:root {
+  --foreground-rgb: 80, 50, 70;
+  --pink-light: #fff0f5;
+  --pink-medium: #ffb6c1;
+  --pink-accent: #ff69b4;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background:
+    /* Glitter sparkle overlay */
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.8) 1px, transparent 1px),
+    radial-gradient(circle at 80% 20%, rgba(255, 182, 193, 0.6) 1px, transparent 1px),
+    radial-gradient(circle at 40% 70%, rgba(255, 255, 255, 0.7) 1px, transparent 1px),
+    radial-gradient(circle at 90% 80%, rgba(255, 105, 180, 0.4) 1px, transparent 1px),
+    radial-gradient(circle at 10% 90%, rgba(255, 255, 255, 0.6) 1px, transparent 1px),
+    radial-gradient(circle at 60% 50%, rgba(255, 182, 193, 0.5) 1px, transparent 1px),
+    radial-gradient(circle at 30% 10%, rgba(255, 255, 255, 0.8) 1px, transparent 1px),
+    radial-gradient(circle at 70% 60%, rgba(255, 192, 203, 0.6) 1px, transparent 1px),
+    /* Soft gradient background */
+    linear-gradient(
+      135deg,
+      #fff0f5 0%,
+      #ffe4ec 25%,
+      #ffd1dc 50%,
+      #ffe4ec 75%,
+      #fff0f5 100%
+    );
+  background-size:
+    100px 100px,
+    150px 150px,
+    120px 120px,
+    180px 180px,
+    90px 90px,
+    200px 200px,
+    130px 130px,
+    160px 160px,
+    100% 100%;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* Animated shimmer effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 100% 50%, rgba(255, 192, 203, 0.2) 0%, transparent 40%),
+    radial-gradient(ellipse at 0% 100%, rgba(255, 182, 193, 0.25) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: -1;
+  animation: shimmer 8s ease-in-out infinite alternate;
+}
+
+@keyframes shimmer {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Custom scrollbar - pink theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff0f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffb6c1, #ff69b4);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff69b4, #ff1493);
+}
+
+/* MDX prose styling */
+.prose {
+  @apply max-w-none;
+}
+
+.prose h1 {
+  @apply text-4xl font-bold mt-8 mb-4 text-gray-900;
+}
+
+.prose h2 {
+  @apply text-3xl font-semibold mt-6 mb-3 text-gray-800;
+}
+
+.prose h3 {
+  @apply text-2xl font-medium mt-4 mb-2 text-gray-800;
+}
+
+.prose p {
+  @apply text-gray-700 leading-relaxed mb-4;
+}
+
+.prose a {
+  @apply text-primary-600 hover:text-primary-800 underline;
+}
+
+.prose ul {
+  @apply list-disc list-inside mb-4 text-gray-700;
+}
+
+.prose ol {
+  @apply list-decimal list-inside mb-4 text-gray-700;
+}
+
+.prose li {
+  @apply mb-1;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-primary-500 pl-4 italic text-gray-600 my-4;
+}
+
+.prose code {
+  @apply bg-gray-100 rounded px-1.5 py-0.5 text-sm font-mono text-primary-700;
+}
+
+.prose pre {
+  @apply bg-gray-900 text-gray-100 rounded-lg p-4 overflow-x-auto mb-4;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 text-inherit;
+}

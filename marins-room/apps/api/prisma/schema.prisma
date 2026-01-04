@@ -1,0 +1,156 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// Users (optional, for future auth expansion)
+// ============================================
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  isAdmin   Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  donations    Donation[]
+  videos       Video[]
+  chatSessions ChatSession[]
+
+  @@map("users")
+}
+
+// ============================================
+// Donations
+// ============================================
+
+enum DonationStatus {
+  PENDING
+  CONFIRMED
+  FAILED
+}
+
+model Donation {
+  id                    String         @id @default(uuid())
+  userId                String?        @map("user_id")
+  email                 String?
+  name                  String?
+  amount                Int // Amount in cents
+  currency              String         @default("usd")
+  status                DonationStatus @default(PENDING)
+  stripeSessionId       String?        @unique @map("stripe_session_id")
+  stripePaymentIntentId String?        @unique @map("stripe_payment_intent_id")
+  message               String?
+  createdAt             DateTime       @default(now()) @map("created_at")
+  updatedAt             DateTime       @updatedAt @map("updated_at")
+
+  user          User?          @relation(fields: [userId], references: [id])
+  paymentEvents PaymentEvent[]
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("donations")
+}
+
+model PaymentEvent {
+  id            String   @id @default(uuid())
+  donationId    String   @map("donation_id")
+  stripeEventId String   @unique @map("stripe_event_id")
+  eventType     String   @map("event_type")
+  payload       Json
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  donation Donation @relation(fields: [donationId], references: [id], onDelete: Cascade)
+
+  @@index([donationId])
+  @@index([eventType])
+  @@map("payment_events")
+}
+
+// ============================================
+// Videos
+// ============================================
+
+enum VideoStatus {
+  UPLOADING
+  PROCESSING
+  READY
+  ERROR
+}
+
+model Video {
+  id              String      @id @default(uuid())
+  userId          String?     @map("user_id")
+  title           String
+  description     String?
+  storageKey      String      @unique @map("storage_key")
+  playbackUrl     String?     @map("playback_url")
+  thumbnailUrl    String?     @map("thumbnail_url")
+  status          VideoStatus @default(UPLOADING)
+  durationSeconds Int?        @map("duration_seconds")
+  fileSizeBytes   BigInt?     @map("file_size_bytes")
+  mimeType        String?     @map("mime_type")
+  errorMessage    String?     @map("error_message")
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("videos")
+}
+
+// ============================================
+// Chat
+// ============================================
+
+enum ChatSessionStatus {
+  ACTIVE
+  CLOSED
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+  SYSTEM
+}
+
+model ChatSession {
+  id          String            @id @default(uuid())
+  userId      String?           @map("user_id")
+  visitorId   String            @map("visitor_id")
+  visitorName String?           @map("visitor_name")
+  status      ChatSessionStatus @default(ACTIVE)
+  metadata    Json?
+  createdAt   DateTime          @default(now()) @map("created_at")
+  updatedAt   DateTime          @updatedAt @map("updated_at")
+
+  user     User?         @relation(fields: [userId], references: [id])
+  messages ChatMessage[]
+
+  @@index([visitorId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("chat_sessions")
+}
+
+model ChatMessage {
+  id        String      @id @default(uuid())
+  sessionId String      @map("session_id")
+  role      MessageRole
+  content   String
+  createdAt DateTime    @default(now()) @map("created_at")
+
+  session ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([createdAt])
+  @@map("chat_messages")
+}

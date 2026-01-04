@@ -1,0 +1,70 @@
+---
+title: "How I Built This Website"
+description: "A technical deep-dive into the architecture and tech stack behind Marin's Room."
+date: "2024-01-20"
+author: "Marin"
+tags: ["tech", "tutorial", "nextjs"]
+published: true
+---
+
+# How I Built This Website
+
+I wanted to share the technical details behind this website for anyone curious about the architecture.
+
+## The Tech Stack
+
+This site is built as a **monorepo** using:
+
+- **Frontend**: Next.js 14 with App Router
+- **Backend**: Express.js with TypeScript
+- **Database**: PostgreSQL with Prisma
+- **Real-time**: WebSockets for chat
+- **Payments**: Stripe for donations
+- **Storage**: S3-compatible for videos
+
+## Why a Monorepo?
+
+Using a pnpm workspace monorepo gives several benefits:
+
+1. **Shared code** - Types and utilities are shared between apps
+2. **Consistent tooling** - Same ESLint, Prettier, and TypeScript configs
+3. **Easy development** - Run everything with one command
+
+## The Blog
+
+Blog posts are written in MDX, which lets me use React components inside Markdown:
+
+```tsx
+// This is a valid MDX component!
+<CustomAlert type="info">
+  Hello from inside MDX!
+</CustomAlert>
+```
+
+## Real-time Chat
+
+The chat feature uses WebSockets for real-time communication. Here's a simplified flow:
+
+1. User starts a session
+2. WebSocket connection established
+3. Messages are sent/received in real-time
+4. AI responses are generated and streamed
+
+## What I Learned
+
+Building this site taught me a lot about:
+
+- Modern React patterns with Server Components
+- WebSocket best practices
+- Payment integration security
+- Video streaming architecture
+
+## Source Code
+
+The architecture is designed to be:
+
+- **Scalable** - Each component can be scaled independently
+- **Maintainable** - Clean separation of concerns
+- **Secure** - Proper auth, validation, and rate limiting
+
+Thanks for reading! Feel free to [ask questions in the chat](/chat).
